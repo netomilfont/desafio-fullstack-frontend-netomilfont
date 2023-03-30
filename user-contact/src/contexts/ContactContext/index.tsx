@@ -1,13 +1,12 @@
-import { createContext } from "vm";
 import api from "../../services/api";
-import { IContactRegister, IContactResponse } from "./types";
+import { IContactContext, IContactRegister, IContactResponse } from "./types";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useContext } from "react";
+import { useContext, createContext } from "react";
 import { UserContext } from "../UserContext";
 import { IDefaultContextProps } from "../UserContext/types";
 
-export const ContactContext = createContext();
+export const ContactContext = createContext({} as IContactContext);
 
 const ContactProvider = ({ children }: IDefaultContextProps) => {
   const { contacts, setContacts } = useContext(UserContext);
@@ -21,7 +20,7 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
       const token = localStorage.getItem("@TOKENUSER");
 
       const responseContacts = await api.post<IContactResponse>(
-        "/contacts/user",
+        "/contacts",
         data,
         {
           headers: { Authorization: `Bearer ${token as string}` },
@@ -54,6 +53,16 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
       setLoading(false);
     }
   };
+
+  return (
+    <ContactContext.Provider
+      value={{
+        registerContact,
+      }}
+    >
+      {children}
+    </ContactContext.Provider>
+  );
 };
 
 export default ContactProvider;

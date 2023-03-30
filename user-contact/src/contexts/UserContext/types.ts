@@ -1,5 +1,5 @@
 import { ILoginDataForm } from "../../pages/Login/types";
-import { IRegisterForm } from "../../pages/Register/types";
+import { IRegisterForm } from "../../pages/Register";
 import { IContactResponse } from "../ContactContext/types";
 
 export interface IUserResponse {

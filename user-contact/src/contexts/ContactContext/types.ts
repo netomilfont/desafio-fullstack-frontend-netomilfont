@@ -11,3 +11,10 @@ export interface IContactResponse {
   telefone: string;
   createdAt: Date;
 }
+
+export interface IContactContext {
+  registerContact: (
+    data: IContactRegister,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
+}

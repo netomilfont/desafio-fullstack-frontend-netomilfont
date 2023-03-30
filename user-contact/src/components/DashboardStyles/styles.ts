@@ -39,6 +39,14 @@ export const Logo = styled.h1`
   font-weight: 600;
 `;
 
+export const SectionMain = styled.div`
+  @media (min-width: 1024px) {
+    display: flex;
+    margin: 0 auto;
+    width: 67%;
+  }
+`;
+
 export const Section = styled.section`
   border-bottom: 1px solid var(--color-grey-3);
 
@@ -68,11 +76,12 @@ export const Section = styled.section`
   }
 
   @media (min-width: 1024px) {
+    border-bottom: none;
+    border-right: 1px solid var(--color-grey-3);
+
     .container__section {
-      flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      width: 60%;
+      align-items: flex-start;
     }
   }
 `;

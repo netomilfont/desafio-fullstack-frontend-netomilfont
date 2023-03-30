@@ -8,10 +8,17 @@ import {
   ButtonPrimary,
 } from "../../components/FormRegister/style";
 import { UserContext } from "../../contexts/UserContext";
-import { IRegisterForm } from "./types";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 YupPassword(yup);
+
+export interface IRegisterForm {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  telefone: string;
+}
 
 const schema = yup.object({
   name: yup.string().required("O seu nome é obrigatório!"),

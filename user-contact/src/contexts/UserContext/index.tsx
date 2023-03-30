@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ILoginDataForm } from "../../pages/Login/types";
-import { IRegisterForm } from "../../pages/Register/types";
+import { IRegisterForm } from "../../pages/Register";
 import api from "../../services/api";
 import { IContactResponse } from "../ContactContext/types";
 import {
@@ -17,9 +17,37 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultContextProps) => {
   const [user, setUser] = useState<IUserResponse | null>(null);
-  const [contacts, setContacts] = useState([] as IContactResponse[]);
+  const [contacts, setContacts] = useState<IContactResponse[]>([]);
+  const [currentRoute, setCurrentRoute] = useState<string | null>(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      const token = localStorage.getItem("@TOKENUSER");
+      if (token) {
+        try {
+          const userId = localStorage.getItem("@USERID");
+          const responseUser = await api.get(`/users/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          const contactsUser = await api.get<IContactResponse[]>(
+            "/contacts/user",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          setUser(responseUser.data);
+          setContacts(contactsUser.data);
+          navigate(currentRoute ? currentRoute : "/dashboard");
+        } catch (error) {
+          localStorage.removeItem("@TOKEN");
+          localStorage.removeItem("@USERID");
+          navigate("/");
+        }
+      }
+    })();
+  }, []);
 
   const login = async (
     data: ILoginDataForm,
@@ -35,7 +63,11 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
       const responseUser = await api.get(`/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      const contactsUser = await api.get<IContactResponse[]>("/contacts/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setUser(responseUser.data);
+      setContacts(contactsUser.data);
       setTimeout(() => {
         navigate("/dashboard");
       }, 1500);
@@ -82,7 +114,9 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, registered, logout }}>
+    <UserContext.Provider
+      value={{ user, login, registered, logout, contacts, setContacts }}
+    >
       {children}
     </UserContext.Provider>
   );
