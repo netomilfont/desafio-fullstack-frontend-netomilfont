@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ILoginDataForm } from "../../pages/Login/types";
 import { IRegisterForm } from "../../pages/Register/types";
 import api from "../../services/api";
+import { IContactResponse } from "../ContactContext/types";
 import {
   IDefaultContextProps,
   iLoginResponse,
@@ -16,6 +17,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultContextProps) => {
   const [user, setUser] = useState<IUserResponse | null>(null);
+  const [contacts, setContacts] = useState([] as IContactResponse[]);
 
   const navigate = useNavigate();
 

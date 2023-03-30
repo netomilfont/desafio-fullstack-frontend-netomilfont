@@ -6,6 +6,8 @@ import {
   Main,
 } from "../../components/DashboardStyles/styles";
 import { UserContext } from "../../contexts/UserContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,6 @@
 import { ILoginDataForm } from "../../pages/Login/types";
 import { IRegisterForm } from "../../pages/Register/types";
+import { IContactResponse } from "../ContactContext/types";
 
 export interface IUserResponse {
   id: string;
@@ -26,4 +27,6 @@ export interface IUserContext {
   ) => void;
   registered: (data: IRegisterForm) => void;
   logout: () => void;
+  contacts: IContactResponse[] | [];
+  setContacts: React.Dispatch<React.SetStateAction<IContactResponse[] | []>>;
 }
