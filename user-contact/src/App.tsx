@@ -1,12 +1,18 @@
-import React from "react";
-import "./App.css";
+import Routes from "./routes";
+import GlobalStyle from "./styles/global";
+import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./contexts/UserContext";
 
-const App = () => {
+function App() {
   return (
     <div className="App">
-      <h1>Teste</h1>
+      <UserProvider>
+        <GlobalStyle />
+        <Routes />
+      </UserProvider>
+      <ToastContainer />
     </div>
   );
-};
+}
 
 export default App;
