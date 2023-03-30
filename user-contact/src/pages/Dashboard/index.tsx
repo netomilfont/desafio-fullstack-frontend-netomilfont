@@ -6,6 +6,7 @@ import {
   Main,
   SectionMain,
 } from "../../components/DashboardStyles/styles";
+import ModalCadContact from "../../components/ModalCadUser";
 import { UserContext } from "../../contexts/UserContext";
 
 const Dashboard = () => {
@@ -87,7 +88,7 @@ const Dashboard = () => {
             )}
           </ul>
         </Main>
-        {/* {cadModal && <ModalCadTech closeModal={setCadModal} />} */}
+        {cadModal && <ModalCadContact closeModal={setCadModal} />}
       </SectionMain>
     </>
   );
