@@ -1,7 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import { ILoginDataForm } from "../../pages/Login/types";
+import { IRegisterForm } from "../../pages/Register/types";
 import api from "../../services/api";
 import {
   IDefaultContextProps,
@@ -45,8 +47,40 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
     }
   };
 
+  const registered = async (data: IRegisterForm) => {
+    try {
+      await api.post<IUserResponse>("/users", data);
+      toast.success("A sua conta foi criada.", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      toast.error("Ops! Algo deu errado", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+    }
+  };
+
+  const logout = async () => {
+    toast.success("Você foi deslogado.", {
+      autoClose: 1500,
+      theme: "dark",
+    });
+    setUser(null);
+    localStorage.removeItem("@TOKENUSER");
+    localStorage.removeItem("@USERID");
+    setTimeout(() => {
+      navigate("/");
+    }, 1500);
+  };
+
   return (
-    <UserContext.Provider value={{ user, login }}>
+    <UserContext.Provider value={{ user, login, registered, logout }}>
       {children}
     </UserContext.Provider>
   );
