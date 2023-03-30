@@ -65,11 +65,11 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
       const token = localStorage.getItem("@TOKENUSER");
       const contact = contacts.filter((cont) => cont !== userContact);
 
-      await api.delete(`/contacts${userContact.id}`, {
+      await api.delete(`/contacts/${userContact.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      toast.success("Contato excluída com sucesso!", {
+      toast.success("Contato excluído com sucesso!", {
         autoClose: 1500,
         theme: "dark",
       });
@@ -90,6 +90,7 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
         registerContact,
         registerModal,
         setRegisterModal,
+        deleteContact,
       }}
     >
       {children}

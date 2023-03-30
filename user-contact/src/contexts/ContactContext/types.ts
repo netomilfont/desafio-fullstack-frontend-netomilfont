@@ -19,4 +19,8 @@ export interface IContactContext {
   ) => void;
   registerModal: boolean;
   setRegisterModal: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteContact: (
+    data: IContactResponse,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
 }

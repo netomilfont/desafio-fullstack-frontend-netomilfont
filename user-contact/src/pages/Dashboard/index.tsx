@@ -13,7 +13,8 @@ import { UserContext } from "../../contexts/UserContext";
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const { user, logout, contacts } = useContext(UserContext);
-  const { registerModal, setRegisterModal } = useContext(ContactContext);
+  const { registerModal, setRegisterModal, deleteContact } =
+    useContext(ContactContext);
 
   return (
     <>
@@ -66,7 +67,10 @@ const Dashboard = () => {
                     <p className="email__user">{contact.email}</p>
                     <p className="email__user">-</p>
                     <p>{contact.telefone}</p>
-                    <button disabled={loading}>
+                    <button
+                      onClick={() => deleteContact(contact, setLoading)}
+                      disabled={loading}
+                    >
                       {loading ? (
                         <p>x</p>
                       ) : (
