@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
     }
   };
 
-  const register = async (data: IRegisterForm) => {
+  const registered = async (data: IRegisterForm) => {
     try {
       await api.post<IUserResponse>("/users", data);
       toast.success("A sua conta foi criada.", {
@@ -80,7 +80,7 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, register, logout }}>
+    <UserContext.Provider value={{ user, login, registered, logout }}>
       {children}
     </UserContext.Provider>
   );

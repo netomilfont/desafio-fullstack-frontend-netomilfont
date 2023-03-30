@@ -24,6 +24,6 @@ export interface IUserContext {
     data: ILoginDataForm,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
-  register: (data: IRegisterForm) => void;
+  registered: (data: IRegisterForm) => void;
   logout: () => void;
 }
