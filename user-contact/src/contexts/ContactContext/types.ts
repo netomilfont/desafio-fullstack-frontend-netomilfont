@@ -17,4 +17,6 @@ export interface IContactContext {
     data: IContactRegister,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
+  registerModal: boolean;
+  setRegisterModal: React.Dispatch<React.SetStateAction<boolean>>;
 }

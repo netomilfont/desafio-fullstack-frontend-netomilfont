@@ -7,11 +7,13 @@ import {
   SectionMain,
 } from "../../components/DashboardStyles/styles";
 import ModalCadContact from "../../components/ModalCadUser";
+import { ContactContext } from "../../contexts/ContactContext";
 import { UserContext } from "../../contexts/UserContext";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const { user, logout, contacts } = useContext(UserContext);
+  const { registerModal, setRegisterModal } = useContext(ContactContext);
 
   return (
     <>
@@ -33,6 +35,7 @@ const Dashboard = () => {
           <div className="div__main">
             <h3>Contacts</h3>
             <svg
+              onClick={() => setRegisterModal(true)}
               width="34"
               height="32"
               viewBox="0 0 34 32"
@@ -88,7 +91,7 @@ const Dashboard = () => {
             )}
           </ul>
         </Main>
-        {cadModal && <ModalCadContact closeModal={setCadModal} />}
+        {registerModal && <ModalCadContact closeModal={setRegisterModal} />}
       </SectionMain>
     </>
   );

@@ -20,7 +20,7 @@ export const Modal = styled.form`
   background-color: var(--color-grey-3);
   box-sizing: border-box;
   width: 296px;
-  height: 260px;
+  height: 300px;
   border-radius: 4px;
 `;
 
