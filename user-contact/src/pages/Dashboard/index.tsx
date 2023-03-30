@@ -59,6 +59,8 @@ const Dashboard = () => {
                 <li key={index} id={contact.id}>
                   <h4>{contact.name}</h4>
                   <div className="container__infoTech">
+                    <p className="email__user">{contact.email}</p>
+                    <p className="email__user">-</p>
                     <p>{contact.telefone}</p>
                     <button disabled={loading}>
                       {loading ? (

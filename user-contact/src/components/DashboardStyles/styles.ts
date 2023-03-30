@@ -29,6 +29,7 @@ export const Header = styled.header`
 
     .container__header {
       width: 60%;
+      max-width: 950px;
     }
   }
 `;
@@ -44,6 +45,8 @@ export const SectionMain = styled.div`
     display: flex;
     margin: 0 auto;
     width: 67%;
+    max-width: 1036px;
+    justify-content: space-around;
   }
 `;
 
@@ -176,6 +179,10 @@ export const Main = styled.main`
     z-index: -1;
   }
 
+  .email__user {
+    display: none;
+  }
+
   button {
     background-color: transparent;
     border: none;
@@ -184,5 +191,10 @@ export const Main = styled.main`
 
   @media (min-width: 1024px) {
     width: 60%;
+    margin: 0 0;
+
+    .email__user {
+      display: flex;
+    }
   }
 `;
