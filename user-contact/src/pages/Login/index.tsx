@@ -7,9 +7,10 @@ import {
   Input,
 } from "../../components/FormLogin/style";
 import * as yup from "yup";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILoginDataForm } from "./types";
+import { UserContext } from "../../contexts/UserContext";
 
 const schema = yup.object({
   email: yup
@@ -20,6 +21,7 @@ const schema = yup.object({
 });
 
 const Login = () => {
+  const { login } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ const Login = () => {
   });
 
   const formSubmit = async (data: ILoginDataForm) => {
-    userLogin(data, setLoading);
+    login(data, setLoading);
   };
 
   function registerUserButton() {
