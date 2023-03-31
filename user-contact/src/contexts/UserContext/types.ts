@@ -30,5 +30,5 @@ export interface IUserContext {
   contacts: IContactResponse[] | [];
   setContacts: React.Dispatch<React.SetStateAction<IContactResponse[] | []>>;
   contactEdit: IContactResponse | null;
-  setContactEdit: React.Dispatch<React.SetStateAction<IContactResponse | []>>;
+  setContactEdit: React.Dispatch<React.SetStateAction<IContactResponse | null>>;
 }

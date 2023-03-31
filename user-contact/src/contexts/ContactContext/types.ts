@@ -33,7 +33,6 @@ export interface IContactContext {
   setEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   updateContact: (
     data: IContactResponse,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    userContact: IContactResponse
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
 }

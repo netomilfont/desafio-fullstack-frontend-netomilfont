@@ -25,7 +25,6 @@ const Dashboard = () => {
 
   function modalEditUser(trueRes: boolean, contactToEdit: IContactResponse) {
     setEditModal(trueRes);
-    console.log(trueRes, contactToEdit);
     setContactEdit(contactToEdit);
   }
 

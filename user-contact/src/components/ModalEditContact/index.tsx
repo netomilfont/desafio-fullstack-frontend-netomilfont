@@ -3,10 +3,7 @@ import * as yup from "yup";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalBackground, Modal, ModalHeader, ModalBody } from "./styles";
-import {
-  IContactResponse,
-  IContactUpdate,
-} from "../../contexts/ContactContext/types";
+import { IContactUpdate } from "../../contexts/ContactContext/types";
 import { IModal } from "../ModalCadUser/types";
 import { ContactContext } from "../../contexts/ContactContext";
 import { UserContext } from "../../contexts/UserContext";
@@ -27,7 +24,7 @@ const ModalUpdateContact = ({ closeModal }: IModal) => {
   });
 
   const submit = async (data: any) => {
-    updateContact(data, setLoading, contactEdit);
+    updateContact(data, setLoading);
   };
 
   return (

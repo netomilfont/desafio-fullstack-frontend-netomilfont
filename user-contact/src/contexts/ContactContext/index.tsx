@@ -14,7 +14,7 @@ import { IDefaultContextProps } from "../UserContext/types";
 export const ContactContext = createContext({} as IContactContext);
 
 const ContactProvider = ({ children }: IDefaultContextProps) => {
-  const { contacts, setContacts } = useContext(UserContext);
+  const { contacts, setContacts, contactEdit } = useContext(UserContext);
   const [registerModal, setRegisterModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
@@ -92,24 +92,28 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
 
   const updateContact = async (
     data: IContactUpdate,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    userContact: IContactResponse
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     try {
       setLoading(true);
       const token = localStorage.getItem("@TOKENUSER");
-      const contact = contacts.filter((cont) => cont !== userContact);
 
-      await api.patch<IContactResponse>("/contacts", data, {
+      await api.patch<IContactResponse>(`/contacts/${contactEdit?.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
+      const contactsUser = await api.get<IContactResponse[]>("/contacts/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setContacts(contactsUser.data);
 
       toast.success("Contato editado com sucesso!", {
         autoClose: 1500,
         theme: "dark",
       });
     } catch (error) {
-      toast.error("Contato não foi excluída!", {
+      toast.error("Contato não foi editado!", {
         autoClose: 1500,
         theme: "dark",
       });
