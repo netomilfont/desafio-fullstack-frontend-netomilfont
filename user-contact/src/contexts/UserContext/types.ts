@@ -43,4 +43,5 @@ export interface IUserContext {
   ) => void;
   editModaluser: boolean;
   setEditModalUser: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteUser: () => void;
 }

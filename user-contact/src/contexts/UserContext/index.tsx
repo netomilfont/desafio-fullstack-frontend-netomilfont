@@ -149,6 +149,33 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
     }, 1500);
   };
 
+  const deleteUser = async () => {
+    try {
+      const token = localStorage.getItem("@TOKENUSER");
+
+      await api.delete<{}>(`/users/${user?.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success("Conta deletada", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+      setUser(null);
+      localStorage.removeItem("@TOKENUSER");
+      localStorage.removeItem("@USERID");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      toast.success("Algo ocorreu, sua conta não foi deletada", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -163,6 +190,7 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
         edit,
         editModaluser,
         setEditModalUser,
+        deleteUser,
       }}
     >
       {children}

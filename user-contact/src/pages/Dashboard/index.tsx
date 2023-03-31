@@ -22,6 +22,7 @@ const Dashboard = () => {
     setContactEdit,
     editModaluser,
     setEditModalUser,
+    deleteUser,
   } = useContext(UserContext);
   const {
     registerModal,
@@ -53,7 +54,9 @@ const Dashboard = () => {
             <h3>Olá, {user?.name} </h3>
             <p>Email: {user?.email}</p>
             <p>Telefone: {user?.telefone}</p>
-            <button className="delete__perfil">deletar conta</button>
+            <button className="delete__perfil" onClick={() => deleteUser()}>
+              deletar conta
+            </button>
           </div>
         </Section>
         <Main>
