@@ -11,10 +11,18 @@ import ModalUpdateContact from "../../components/ModalEditContact";
 import { ContactContext } from "../../contexts/ContactContext";
 import { IContactResponse } from "../../contexts/ContactContext/types";
 import { UserContext } from "../../contexts/UserContext";
+import ModalOpenEditUser from "../../components/ModalEditUser";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
-  const { user, logout, contacts, setContactEdit } = useContext(UserContext);
+  const {
+    user,
+    logout,
+    contacts,
+    setContactEdit,
+    editModaluser,
+    setEditModalUser,
+  } = useContext(UserContext);
   const {
     registerModal,
     setRegisterModal,
@@ -34,7 +42,7 @@ const Dashboard = () => {
         <div className="container__header">
           <Logo>User Contact</Logo>
           <div className="div__button">
-            <button onClick={() => editPerfil()}>Editar</button>
+            <button onClick={() => setEditModalUser(true)}>Editar</button>
             <button onClick={() => logout()}>Sair</button>
           </div>
         </div>
@@ -45,6 +53,7 @@ const Dashboard = () => {
             <h3>Olá, {user?.name} </h3>
             <p>Email: {user?.email}</p>
             <p>Telefone: {user?.telefone}</p>
+            <button className="delete__perfil">deletar conta</button>
           </div>
         </Section>
         <Main>
@@ -118,6 +127,7 @@ const Dashboard = () => {
         </Main>
         {registerModal && <ModalCadContact closeModal={setRegisterModal} />}
         {editModal && <ModalUpdateContact closeModal={setEditModal} />}
+        {editModaluser && <ModalOpenEditUser closeModal={setEditModalUser} />}
       </SectionMain>
     </>
   );

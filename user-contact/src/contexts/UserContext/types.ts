@@ -37,4 +37,10 @@ export interface IUserContext {
   setContacts: React.Dispatch<React.SetStateAction<IContactResponse[] | []>>;
   contactEdit: IContactResponse | null;
   setContactEdit: React.Dispatch<React.SetStateAction<IContactResponse | null>>;
+  edit: (
+    data: ILoginDataForm,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
+  editModaluser: boolean;
+  setEditModalUser: React.Dispatch<React.SetStateAction<boolean>>;
 }

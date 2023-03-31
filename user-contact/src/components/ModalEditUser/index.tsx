@@ -15,14 +15,14 @@ const schema = yup.object({
 
 const ModalOpenEditUser = ({ closeModal }: IModal) => {
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, edit } = useContext(UserContext);
 
   const { register, handleSubmit } = useForm<IUserUpdate>({
     resolver: yupResolver(schema),
   });
 
-  const submit = async (data: IUserUpdate) => {
-    updateContact(data, setLoading);
+  const submit = async (data: any) => {
+    edit(data, setLoading);
   };
 
   return (
@@ -30,7 +30,7 @@ const ModalOpenEditUser = ({ closeModal }: IModal) => {
       <ModalBackground className="modal__background">
         <Modal className="modal__container" onSubmit={handleSubmit(submit)}>
           <ModalHeader className="modal__header">
-            <h4>Editar Contato</h4>
+            <h4>Editar Perfil</h4>
             <button type="button" onClick={() => closeModal(false)}>
               X
             </button>

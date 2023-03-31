@@ -84,6 +84,19 @@ export const Section = styled.section`
     width: 90%;
   }
 
+  .delete__perfil {
+    background-color: var(--color-grey-3);
+    color: red;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .delete__perfil:hover {
+    background-color: red;
+    color: var(--color-grey-3);
+  }
+
   @media (min-width: 1024px) {
     border-bottom: none;
     border-right: 1px solid var(--color-grey-3);

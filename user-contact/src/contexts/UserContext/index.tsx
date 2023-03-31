@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ILoginDataForm } from "../../pages/Login/types";
 import { IRegisterForm } from "../../pages/Register";
 import api from "../../services/api";
-import { IContactResponse, IContactUpdate } from "../ContactContext/types";
+import { IContactResponse } from "../ContactContext/types";
 import {
   IDefaultContextProps,
   iLoginResponse,
@@ -160,6 +160,9 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
         setContacts,
         contactEdit,
         setContactEdit,
+        edit,
+        editModaluser,
+        setEditModalUser,
       }}
     >
       {children}
