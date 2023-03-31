@@ -11,6 +11,7 @@ import {
   iLoginResponse,
   IUserContext,
   IUserResponse,
+  IUserUpdate,
 } from "./types";
 
 export const UserContext = createContext({} as IUserContext);
@@ -20,6 +21,7 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
   const [contactEdit, setContactEdit] = useState<IContactResponse | null>(null);
   const [contacts, setContacts] = useState<IContactResponse[]>([]);
   const [currentRoute, setCurrentRoute] = useState<string | null>(null);
+  const [editModaluser, setEditModalUser] = useState(false);
 
   const navigate = useNavigate();
 
@@ -98,6 +100,39 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
         autoClose: 1500,
         theme: "dark",
       });
+    }
+  };
+
+  const edit = async (
+    data: IUserUpdate,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("@TOKENUSER");
+
+      await api.patch<IUserResponse>(`/users/${user?.id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const responseUser = await api.get(`/users/${user?.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success("User editado com sucesso!", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+
+      setUser(responseUser.data);
+      setEditModalUser(false);
+    } catch (error) {
+      toast.error("User não foi editado!", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+    } finally {
+      setLoading(true);
     }
   };
 

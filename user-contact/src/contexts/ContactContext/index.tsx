@@ -107,6 +107,7 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
       });
 
       setContacts(contactsUser.data);
+      setEditModal(false);
 
       toast.success("Contato editado com sucesso!", {
         autoClose: 1500,

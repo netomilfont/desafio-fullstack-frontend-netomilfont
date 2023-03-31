@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalBackground, Modal, ModalHeader, ModalBody } from "./styles";
 import { IModal } from "../ModalCadUser/types";
+import { IUserUpdate } from "../../contexts/UserContext/types";
+import { UserContext } from "../../contexts/UserContext";
 
 const schema = yup.object({
   name: yup.string(),
@@ -13,12 +15,13 @@ const schema = yup.object({
 
 const ModalOpenEditUser = ({ closeModal }: IModal) => {
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext);
 
-  const { register, handleSubmit } = useForm<IContactUpdate>({
+  const { register, handleSubmit } = useForm<IUserUpdate>({
     resolver: yupResolver(schema),
   });
 
-  const submit = async (data: any) => {
+  const submit = async (data: IUserUpdate) => {
     updateContact(data, setLoading);
   };
 
@@ -37,25 +40,25 @@ const ModalOpenEditUser = ({ closeModal }: IModal) => {
             <input
               type="text"
               {...register("name")}
-              defaultValue={contactEdit?.name}
+              defaultValue={user?.name}
             />
 
             <label htmlFor="email">Email</label>
             <input
               type="text"
               {...register("email")}
-              defaultValue={contactEdit?.email}
+              defaultValue={user?.email}
             />
 
             <label htmlFor="telefone">Telefone</label>
             <input
               type="text"
               {...register("telefone")}
-              defaultValue={contactEdit?.telefone}
+              defaultValue={user?.telefone}
             />
 
             <button type="submit" disabled={loading}>
-              {loading ? "Editando..." : "Editar contato"}
+              {loading ? "Editando..." : "Editar perfil"}
             </button>
           </ModalBody>
         </Modal>
