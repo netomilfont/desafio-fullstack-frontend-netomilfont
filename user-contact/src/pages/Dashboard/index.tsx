@@ -7,21 +7,37 @@ import {
   SectionMain,
 } from "../../components/DashboardStyles/styles";
 import ModalCadContact from "../../components/ModalCadUser";
+import ModalUpdateContact from "../../components/ModalEditContact";
 import { ContactContext } from "../../contexts/ContactContext";
+import { IContactResponse } from "../../contexts/ContactContext/types";
 import { UserContext } from "../../contexts/UserContext";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
-  const { user, logout, contacts } = useContext(UserContext);
-  const { registerModal, setRegisterModal, deleteContact } =
-    useContext(ContactContext);
+  const { user, logout, contacts, setContactEdit } = useContext(UserContext);
+  const {
+    registerModal,
+    setRegisterModal,
+    deleteContact,
+    setEditModal,
+    editModal,
+  } = useContext(ContactContext);
+
+  function modalEditUser(trueRes: boolean, contactToEdit: IContactResponse) {
+    setEditModal(trueRes);
+    console.log(trueRes, contactToEdit);
+    setContactEdit(contactToEdit);
+  }
 
   return (
     <>
       <Header>
         <div className="container__header">
           <Logo>User Contact</Logo>
-          <button onClick={() => logout()}>Sair</button>
+          <div className="div__button">
+            <button onClick={() => editPerfil()}>Editar</button>
+            <button onClick={() => logout()}>Sair</button>
+          </div>
         </div>
       </Header>
       <SectionMain>
@@ -68,6 +84,12 @@ const Dashboard = () => {
                     <p className="email__user">-</p>
                     <p>{contact.telefone}</p>
                     <button
+                      className="edit__contact"
+                      onClick={() => modalEditUser(true, contact)}
+                    >
+                      editar
+                    </button>
+                    <button
                       onClick={() => deleteContact(contact, setLoading)}
                       disabled={loading}
                     >
@@ -96,6 +118,7 @@ const Dashboard = () => {
           </ul>
         </Main>
         {registerModal && <ModalCadContact closeModal={setRegisterModal} />}
+        {editModal && <ModalUpdateContact closeModal={setEditModal} />}
       </SectionMain>
     </>
   );

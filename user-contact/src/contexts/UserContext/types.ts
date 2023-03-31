@@ -29,4 +29,6 @@ export interface IUserContext {
   logout: () => void;
   contacts: IContactResponse[] | [];
   setContacts: React.Dispatch<React.SetStateAction<IContactResponse[] | []>>;
+  contactEdit: IContactResponse | null;
+  setContactEdit: React.Dispatch<React.SetStateAction<IContactResponse | []>>;
 }

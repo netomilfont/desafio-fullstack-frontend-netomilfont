@@ -21,6 +21,12 @@ export const Header = styled.header`
     width: 90%;
   }
 
+  .div__button {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+  }
+
   @media (min-width: 1024px) {
     button:hover {
       background-color: var(--color-grey-2);
@@ -187,6 +193,17 @@ export const Main = styled.main`
     background-color: transparent;
     border: none;
     padding: 0;
+  }
+
+  .edit__contact {
+    background-color: var(--color-grey-1);
+    color: var(--color-grey-0);
+    padding: 4px;
+    border-radius: 3px;
+  }
+
+  .edit_contact:hover {
+    background-color: var(--color-primary-focus);
   }
 
   @media (min-width: 1024px) {

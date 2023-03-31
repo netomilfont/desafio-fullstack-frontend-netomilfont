@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ILoginDataForm } from "../../pages/Login/types";
 import { IRegisterForm } from "../../pages/Register";
 import api from "../../services/api";
-import { IContactResponse } from "../ContactContext/types";
+import { IContactResponse, IContactUpdate } from "../ContactContext/types";
 import {
   IDefaultContextProps,
   iLoginResponse,
@@ -17,6 +17,7 @@ export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultContextProps) => {
   const [user, setUser] = useState<IUserResponse | null>(null);
+  const [contactEdit, setContactEdit] = useState<IContactResponse | null>(null);
   const [contacts, setContacts] = useState<IContactResponse[]>([]);
   const [currentRoute, setCurrentRoute] = useState<string | null>(null);
 
@@ -115,7 +116,16 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
 
   return (
     <UserContext.Provider
-      value={{ user, login, registered, logout, contacts, setContacts }}
+      value={{
+        user,
+        login,
+        registered,
+        logout,
+        contacts,
+        setContacts,
+        contactEdit,
+        setContactEdit,
+      }}
     >
       {children}
     </UserContext.Provider>

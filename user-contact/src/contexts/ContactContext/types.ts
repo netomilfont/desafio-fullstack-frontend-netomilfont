@@ -12,6 +12,12 @@ export interface IContactResponse {
   createdAt: Date;
 }
 
+export interface IContactUpdate {
+  name?: string;
+  email?: string;
+  telefone?: string;
+}
+
 export interface IContactContext {
   registerContact: (
     data: IContactRegister,
@@ -22,5 +28,12 @@ export interface IContactContext {
   deleteContact: (
     data: IContactResponse,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
+  editModal: boolean;
+  setEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+  updateContact: (
+    data: IContactResponse,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    userContact: IContactResponse
   ) => void;
 }

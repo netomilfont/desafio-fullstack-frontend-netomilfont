@@ -1,5 +1,10 @@
 import api from "../../services/api";
-import { IContactContext, IContactRegister, IContactResponse } from "./types";
+import {
+  IContactContext,
+  IContactRegister,
+  IContactResponse,
+  IContactUpdate,
+} from "./types";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import { useContext, createContext, useState } from "react";
@@ -11,6 +16,7 @@ export const ContactContext = createContext({} as IContactContext);
 const ContactProvider = ({ children }: IDefaultContextProps) => {
   const { contacts, setContacts } = useContext(UserContext);
   const [registerModal, setRegisterModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const registerContact = async (
     data: IContactRegister,
@@ -84,6 +90,34 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
     }
   };
 
+  const updateContact = async (
+    data: IContactUpdate,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    userContact: IContactResponse
+  ) => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("@TOKENUSER");
+      const contact = contacts.filter((cont) => cont !== userContact);
+
+      await api.patch<IContactResponse>("/contacts", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      toast.success("Contato editado com sucesso!", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+    } catch (error) {
+      toast.error("Contato não foi excluída!", {
+        autoClose: 1500,
+        theme: "dark",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ContactContext.Provider
       value={{
@@ -91,6 +125,9 @@ const ContactProvider = ({ children }: IDefaultContextProps) => {
         registerModal,
         setRegisterModal,
         deleteContact,
+        editModal,
+        setEditModal,
+        updateContact,
       }}
     >
       {children}
