@@ -19,6 +19,12 @@ export interface iLoginResponse {
   token: string;
 }
 
+export interface IUserUpdate {
+  name?: string;
+  email?: string;
+  telefone?: string;
+}
+
 export interface IUserContext {
   user: IUserResponse | null;
   login: (
