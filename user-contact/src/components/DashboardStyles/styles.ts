@@ -41,8 +41,8 @@ export const Header = styled.header`
 `;
 
 export const Logo = styled.h1`
-  color: var(--color-primary);
-  font-size: 1.2rem;
+  color: var(--color-grey-0);
+  font-size: 1.8rem;
   font-weight: 600;
 `;
 
@@ -80,7 +80,7 @@ export const Section = styled.section`
     align-items: flex-start;
     gap: 10px;
     margin: 0 auto;
-    padding: 45px 15px;
+    padding: 45px 0px;
     width: 90%;
   }
 
@@ -104,6 +104,7 @@ export const Section = styled.section`
     .container__section {
       justify-content: space-between;
       align-items: flex-start;
+      width: 99%;
     }
   }
 `;
@@ -151,7 +152,7 @@ export const Main = styled.main`
     width: 100%;
     box-sizing: border-box;
     border-radius: 4px;
-    background-color: var(--color-grey-3);
+    background-color: var(--color-secondary-blue);
     padding: 22px 9px;
     display: flex;
     flex-direction: column;
@@ -164,7 +165,7 @@ export const Main = styled.main`
     align-items: center;
     box-sizing: border-box;
     padding: 12px;
-    background-color: var(--color-grey-4);
+    background-color: #0f111b;
     border-radius: 4px;
     height: 49px;
     transition: 0.3s;
@@ -183,7 +184,7 @@ export const Main = styled.main`
 
   ul li p {
     font-size: 0.75rem;
-    color: var(--color-grey-1);
+    color: #e6d06c;
   }
 
   .container__infoTech {

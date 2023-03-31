@@ -61,7 +61,7 @@ const Dashboard = () => {
         </Section>
         <Main>
           <div className="div__main">
-            <h3>Contacts</h3>
+            <h3>Contatos</h3>
             <svg
               onClick={() => setRegisterModal(true)}
               width="34"

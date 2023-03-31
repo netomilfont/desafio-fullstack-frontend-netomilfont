@@ -2,9 +2,10 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     :root  {
-        --color-primary: #72edda;
+        --color-primary: #bf1650;
         --color-primary-focus: #00ddbb;
         --color-primary-negative: #136659;
+        --color-secondary-blue: rgb(8, 18, 41);
         --color-grey-4: #121214;
         --color-grey-3: #212529;
         --color-grey-2: #343B41;
@@ -46,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
-        background-color: var(--color-grey-4);
+        background-color: var(--color-secondary-blue);
     }
     ol, ul {
         list-style: none;
