@@ -44,4 +44,6 @@ export interface IUserContext {
   editModaluser: boolean;
   setEditModalUser: React.Dispatch<React.SetStateAction<boolean>>;
   deleteUser: () => void;
+  currentRoute: string | null;
+  setCurrentRoute: React.Dispatch<React.SetStateAction<string | null>>;
 }
