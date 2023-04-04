@@ -191,6 +191,8 @@ export const UserProvider = ({ children }: IDefaultContextProps) => {
         editModaluser,
         setEditModalUser,
         deleteUser,
+        currentRoute,
+        setCurrentRoute,
       }}
     >
       {children}
